@@ -17,18 +17,25 @@ def speech():
     text = simpledialog.askstring("TTS-PL", "TEXT:", parent=root)
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[0].id)
-    textn = ''.join(text.splitlines())
-    engine.say(textn.replace("\n", " "))
-    engine.runAndWait()
+    if text is not NONE:
+        textn = ''.join(text.splitlines())
+        engine.say(textn.replace("\n", " "))
+        engine.runAndWait()
+    else:
+        return
 
 def speech_en():
     engine = pyttsx3.init('sapi5')
     text = simpledialog.askstring("TTS-EN", "TEXT:", parent=root)
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[1].id)
-    textn = ''.join(text.splitlines())
-    engine.say(textn.replace("\n", " "))
-    engine.runAndWait()
+    engine.setProperty('rate', 150)
+    if text is not NONE:
+        textn = ''.join(text.splitlines())
+        engine.say(textn.replace("\n", " "))
+        engine.runAndWait()
+    else:
+        return
 
 mainframe = ttk.Frame(root, padding="6 6 18 18")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
